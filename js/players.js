@@ -9,6 +9,7 @@ class PlayersClass {
 
     draw() {
        image(this.player, this.x, this.y, 45, 100)
+       
 
        if (keyIsDown(40)){
         
@@ -30,7 +31,7 @@ class PlayersClass {
 
     moveRight() {
 		if (this.x < 950) {
-            this.x += 5
+            this.x += 1.5
         }
 		} 
 	
@@ -50,8 +51,22 @@ class PlayersClass {
 	
 	moveDown() {
         if (this.y < 600) {
-        this.y += 5
+        this.y += 1.5
         }
     }
     
+}
+
+
+class Npc {
+    constructor() {
+        this.npc = game.npc
+        this.x = 200;
+        this.y = 430;
+        this.image;
+    }
+
+    draw() {
+        image(this.npc, 800, this.y, 45, 100)
+    }
 }
