@@ -33,7 +33,7 @@ class PlayersClass {
 		if (this.x < 950) {
             this.x += 1.5
         }
-		} 
+	} 
 	
 	moveLeft() {
         if (this.x > 0) {
@@ -67,6 +67,7 @@ class Npc {
     }
 
     draw() {
+
         image(this.npc, 800, this.y, 45, 100)
     }
 }
