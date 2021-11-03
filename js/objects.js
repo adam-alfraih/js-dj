@@ -36,6 +36,8 @@ class ChatBubble {
         this.chatBubble2 = game.chatBubble2
         this.chatBubbleSuccess = game.chatBubbleSuccess
 
+
+
     }
 
 
@@ -56,6 +58,7 @@ class ChatBubble {
         else if (game.checkedCd === 'rightCd') {
             //console.log(game.checkedCd)
             image(this.chatBubbleSuccess, 835, 290, 150, 150)
+
 
         } 
         else if (game.checkedCd === 'undefined') {

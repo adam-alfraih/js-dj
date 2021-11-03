@@ -14,9 +14,9 @@ class Game {
         this.player = new PlayersClass();
         this.npc = new Npc();
         this.chatBubble = new ChatBubble();
-        this.chatBubbleFail = new ChatBubble();
-        this.chatBubble2 = new ChatBubble();
-        this.chatBubbleSuccess = new ChatBubble();
+        // this.chatBubbleFail = new ChatBubble();
+        // this.chatBubble2 = new ChatBubble();
+        // this.chatBubbleSuccess = new ChatBubble();
         
         this.canGrabOrDrop = false;
         this.hasCd = false;
@@ -26,7 +26,8 @@ class Game {
 
     preload() {
         this.backgroundImage = loadImage("../assets/background/club-background.png");
-        // this.backgroundFail = loadImage("../assets/background/club-backgroundRed.png");
+        this.backgroundFail = loadImage("../assets/background/club-backgroundRed.png");
+        this.backgroundSuccess = loadImage("../assets/background/club-backgroundBright.png");
 
         this.cd = loadImage("../assets/cd/cdgif.gif");
 
@@ -99,19 +100,19 @@ class Game {
 
     djBoothInteraction() {
 
-        if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 120, this.djBooth.y + 50) <= 20) {
+        if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 140, this.djBooth.y + 50) <= 20) {
 
             this.checkedCd = 'wrongCd'
 
 
         }
 
-        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 120, this.djBooth.y + 50) <= 20) {
+        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 140, this.djBooth.y + 50) <= 20) {
 
             this.checkedCd = 'wrongCd'
 
         }
-        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 120, this.djBooth.y + 50) <= 20) {
+        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 140, this.djBooth.y + 50) <= 20) {
 
             this.checkedCd = 'rightCd'
 
