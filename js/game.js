@@ -6,6 +6,7 @@ class Game {
 
     setup() {
         this.background = new Background();
+        // this.backgroundFail = new Background();
         this.cd1 = new Cds(250, 600);
         this.cd2 = new Cds(470, 600);
         this.cd3 = new Cds(690, 600);
@@ -13,6 +14,10 @@ class Game {
         this.player = new PlayersClass();
         this.npc = new Npc();
         this.chatBubble = new ChatBubble();
+        this.chatBubbleFail = new ChatBubble();
+        this.chatBubble2 = new ChatBubble();
+        this.chatBubbleSuccess = new ChatBubble();
+        
         this.canGrabOrDrop = false;
         this.hasCd = false;
         this.grabbedCd
@@ -21,6 +26,7 @@ class Game {
 
     preload() {
         this.backgroundImage = loadImage("../assets/background/club-background.png");
+        // this.backgroundFail = loadImage("../assets/background/club-backgroundRed.png");
 
         this.cd = loadImage("../assets/cd/cdgif.gif");
 
@@ -31,6 +37,9 @@ class Game {
         this.npc = loadImage("../assets/npc/npc.png")
 
         this.chatBubble = loadImage("../assets/chat-bubbles/chatBubble1.png")
+        this.chatBubbleFail = loadImage("../assets/chat-bubbles/chatBubbleFail.png")
+        this.chatBubble2 = loadImage(("../assets/chat-bubbles/chatBubble2.png"))
+        this.chatBubbleSuccess = loadImage(("../assets/chat-bubbles/chatBubbleSuccess.png"))
     }
 
     draw() {
@@ -61,8 +70,10 @@ class Game {
             this.hasCd = !this.hasCd;
             if (this.hasCd) {
                 this.grabbedCd = this.currentCd
+                this.checkedCd = "undefined"
             } else {
                 this.grabbedCd = ""
+                this.checkedCd = "noCd"
             }
 
         }
@@ -89,11 +100,22 @@ class Game {
     djBoothInteraction() {
 
         if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 120, this.djBooth.y + 50) <= 20) {
-            console.log("djBooth")
+
             this.checkedCd = 'wrongCd'
-            console.log(this.checkedCd)
+
+
         }
 
+        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 120, this.djBooth.y + 50) <= 20) {
+
+            this.checkedCd = 'wrongCd'
+
+        }
+        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 120, this.djBooth.y + 50) <= 20) {
+
+            this.checkedCd = 'rightCd'
+
+        }
     }
 }
 

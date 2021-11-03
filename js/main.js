@@ -25,18 +25,16 @@ function keyPressed() {
 		game.player.moveLeft();
 	}
 	if (keyCode === 38) {
-		console.log(keyCode)
+
 		// move the player up
 		game.player.moveUp();
 	}
 	if (keyCode === 40) {
-		console.log(keyCode)
 		// move the player up
 		game.player.moveDown();
 
 	}
 	if (keyCode === 32) {
-		console.log(keyCode)
 		// move the player up
 		game.grabOrDrop();
 	}
