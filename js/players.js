@@ -31,27 +31,27 @@ class PlayersClass {
 
     moveRight() {
 		if (this.x < 950) {
-            this.x += 1.5
+            this.x += 2
         }
 	} 
 	
 	moveLeft() {
         if (this.x > 0) {
-		this.x -= 1.5
+		this.x -= 2
         }
 	}
 	
 
 	moveUp() {
         if (this.y > 400){
-        this.y -= 1.5
+        this.y -= 2
         }
     }
 	        
 	
 	moveDown() {
         if (this.y < 600) {
-        this.y += 1.5
+        this.y += 2
         }
     }
     

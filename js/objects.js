@@ -35,38 +35,39 @@ class ChatBubble {
         this.chatBubbleFail = game.chatBubbleFail
         this.chatBubble2 = game.chatBubble2
         this.chatBubbleSuccess = game.chatBubbleSuccess
-
-
+        this.playAgain = game.playAgain
 
     }
 
 
 
     draw() {
-
         // if there is no cd then display this image
-        if (game.checkedCd === 'wrongCd' && !game.hasCd) {
+        if (game.checkedCd === 'wrongCd' && !game.hasCd)  {
             //console.log(game.checkedCd)
-            image(this.chatBubbleFail, 835, 290, 150, 150)
-
+            image(this.chatBubbleFail, 735, 320, 200, 100)
+            game.isGameOver = true
 
         }
-        else if (game.checkedCd === 'rightCd' && !game.hasCd) {
+        else if (game.checkedCd === 'rightCd' && !game.hasCd )  {
             //console.log(game.checkedCd)
-            image(this.chatBubbleSuccess, 835, 290, 150, 150)
-
-
+            image(this.chatBubbleSuccess, 735, 320, 200, 100)
+            game.isGameOver = true
         }
         else if (game.checkedCd === 'undefined') {
             //console.log(game.checkedCd)
 
-            image(this.chatBubble2, 835, 290, 150, 150)
+            image(this.chatBubble2, 735, 320, 200, 100)
 
         } else {
-            image(this.chatBubble, 835, 290, 150, 150)
+            image(this.chatBubble, 735, 320, 200, 100)
         }
         // if checkedCd = 'true'
         //   image(this.chatBubble, 835, 290, 150, 150)
 
+    }
+
+    drawPlayAgain() {
+        image(this.playAgain, 350, 150, 300, 100)
     }
 }

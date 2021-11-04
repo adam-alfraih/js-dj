@@ -3,7 +3,7 @@ class Game {
         this.correctCd = false
         this.checkedCd = 'noCd'
         this.gameStart = false;
-        
+        this.isGameOver = false;
     }
 
 
@@ -11,26 +11,56 @@ class Game {
     setup() {
         this.background = new Background();
         // this.backgroundFail = new Background();
-        this.cd1 = new Cds(250, 600);
-        this.cd2 = new Cds(470, 600);
-        this.cd3 = new Cds(690, 600);
+        this.cdCoords = [
+            { "x": 250, "y": 600 },
+            { "x": 470, "y": 600 },
+            { "x": 690, "y": 600 }
+        ]
+        this.shuffleArray(this.cdCoords)
+        this.cd1 = new Cds(this.cdCoords[0].x, this.cdCoords[0].y);
+        this.cd2 = new Cds(this.cdCoords[1].x, this.cdCoords[1].y);
+        this.cd3 = new Cds(this.cdCoords[2].x, this.cdCoords[2].y);
         this.djBooth = new DjBoothClass(360, 360);
         this.player = new PlayersClass();
         this.npc = new Npc();
         this.chatBubble = new ChatBubble();
+
+        //MUSIC
+
+        this.clubSound = new Audio("../assets/music/clubSound.mp3");
+        this.cd1Sound = new Audio("../assets/music/cd1.m4a");
+        this.cd2Sound = new Audio("../assets/music/cd2.m4a");
+        this.cd3Sound = new Audio("../assets/music/cd3.m4a");
+
+
+        draw();
+
+
         // this.chatBubbleFail = new ChatBubble();
         // this.chatBubble2 = new ChatBubble();
         // this.chatBubbleSuccess = new ChatBubble();
-        
+
         this.canGrabOrDrop = false;
         this.hasCd = false;
         this.grabbedCd
         this.currentCd
     }
+    shuffleArray(cdsPositions) {
 
+        for (let i = 0; i < cdsPositions.length; i++) {
+            this.changePosition(i)
+        }
+    }
+
+    changePosition(currentIndex) {
+        const rndIndex = Math.floor(Math.random() * currentIndex)
+        const holder = this.cdCoords[currentIndex];
+        this.cdCoords[currentIndex] = this.cdCoords[rndIndex];
+        this.cdCoords[rndIndex] = holder;
+    }
     preload() {
-        this.startScreen = loadImage("assets/start-screen/startScreen.png");
-    
+        this.startScreen = loadImage("assets/start-screen/startScreen2.gif");
+
         // this.backgroundImage = loadImage("../assets/background/club-background.png");
         this.backgroundImage = loadImage("assets/background/club-background.png");
         this.backgroundFail = loadImage("assets/background/club-backgroundRed.png");
@@ -44,19 +74,24 @@ class Game {
 
         this.npc = loadImage("assets/npc/npc.png")
 
-        this.chatBubble = loadImage("assets/chat-bubbles/chatBubble1.png")
-        this.chatBubbleFail = loadImage("assets/chat-bubbles/chatBubbleFail.png")
-        this.chatBubble2 = loadImage(("assets/chat-bubbles/chatBubble2.png"))
-        this.chatBubbleSuccess = loadImage(("assets/chat-bubbles/chatBubbleSuccess.png"))
+        this.chatBubble = loadImage("assets/chat-bubbles/chatBubble1.gif")
+        this.chatBubbleFail = loadImage("assets/chat-bubbles/chatBubbleFail.gif")
+        this.chatBubble2 = loadImage(("assets/chat-bubbles/chatBubble2.gif"))
+        this.chatBubbleSuccess = loadImage(("assets/chat-bubbles/chatBubbleSuccess.gif"))
+
+        this.playAgain = loadImage("assets/text/playAgain.png")
     }
 
     draw() {
-        clear()
-        if (this.gameStart === false) {
-            this.background.draw();
-            image(this.startScreen, 200, 70, 600, 400)
-        } else if (this.gameStart === true) {
 
+        console.log(this.gameStart, this.isGameOver)
+        if (this.gameStart === false && !this.isGameOver) {
+            clear()
+            this.background.draw();
+            image(this.startScreen, 0, 0, 1000, 700)
+        } else if (this.gameStart && !this.isGameOver) {
+            clear()
+            this.clubSound.play();
             this.background.draw();
             this.djBooth.draw();
             this.cd1.draw();
@@ -68,6 +103,17 @@ class Game {
             this.moveGrabbedCd()
             this.canGrabOrDrop = this.cdPlayerInteraction();
             this.djBoothInteraction();
+        } else if (this.isGameOver) {
+            clear()
+            this.background.draw();
+            this.djBooth.draw();
+            this.cd1.draw();
+            this.cd2.draw();
+            this.cd3.draw();
+            this.npc.draw();
+            this.chatBubble.draw();
+            this.player.draw();
+            this.chatBubble.drawPlayAgain();
         }
 
 
@@ -81,7 +127,7 @@ class Game {
 
     grabOrDrop() {
 
-        if (this.canGrabOrDrop) {
+        if (this.canGrabOrDrop && !this.isGameOver) {
             this.hasCd = !this.hasCd;
             if (this.hasCd) {
                 this.grabbedCd = this.currentCd
@@ -114,23 +160,38 @@ class Game {
 
     djBoothInteraction() {
 
-        if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 40) {
-
+        if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 100) {
             this.checkedCd = 'wrongCd'
+
+            if (!game.hasCd) {
+                this.clubSound.pause();
+                this.cd1Sound.play();
+            }
 
 
         }
 
-        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 40) {
-
+        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 100) {
             this.checkedCd = 'wrongCd'
+            if (!game.hasCd) {
+                this.clubSound.pause();
+                this.cd2Sound.play();
+            }
 
         }
-        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 40) {
-
+        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 100) {
             this.checkedCd = 'rightCd'
 
+            if (!game.hasCd) {
+                this.clubSound.pause();
+                this.cd3Sound.play();
+            } 
+
         }
+    }
+
+    gameReset() {
+        location.reload();
     }
 }
 
