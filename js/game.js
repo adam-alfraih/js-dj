@@ -27,10 +27,10 @@ class Game {
 
         //MUSIC
 
-        this.clubSound = new Audio("../assets/music/clubSound.mp3");
-        this.cd1Sound = new Audio("../assets/music/cd1.m4a");
-        this.cd2Sound = new Audio("../assets/music/cd2.m4a");
-        this.cd3Sound = new Audio("../assets/music/cd3.m4a");
+        this.clubSound = new Audio("assets/music/clubSound.mp3");
+        this.cd1Sound = new Audio("assets/music/cd1.m4a");
+        this.cd2Sound = new Audio("assets/music/cd2.m4a");
+        this.cd3Sound = new Audio("assets/music/cd3.m4a");
 
 
         draw();
