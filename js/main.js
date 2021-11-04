@@ -38,4 +38,9 @@ function keyPressed() {
 		// move the player up
 		game.grabOrDrop();
 	}
+
+	if (keyCode = 13) {
+		// move the player up
+		game.gameStart = true;
+	}
 }

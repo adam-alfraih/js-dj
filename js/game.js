@@ -2,7 +2,11 @@ class Game {
     constructor() {
         this.correctCd = false
         this.checkedCd = 'noCd'
+        this.gameStart = false;
+        
     }
+
+
 
     setup() {
         this.background = new Background();
@@ -25,37 +29,47 @@ class Game {
     }
 
     preload() {
-        this.backgroundImage = loadImage("../assets/background/club-background.png");
-        this.backgroundFail = loadImage("../assets/background/club-backgroundRed.png");
-        this.backgroundSuccess = loadImage("../assets/background/club-backgroundBright.png");
+        this.startScreen = loadImage("assets/start-screen/startScreen.png");
+    
+        // this.backgroundImage = loadImage("../assets/background/club-background.png");
+        this.backgroundImage = loadImage("assets/background/club-background.png");
+        this.backgroundFail = loadImage("assets/background/club-backgroundRed.png");
+        this.backgroundSuccess = loadImage("assets/background/club-backgroundBright.png");
 
-        this.cd = loadImage("../assets/cd/cdgif.gif");
+        this.cd = loadImage("assets/cd/cdgif.gif");
 
-        this.djBooth = loadImage("../assets/djbooth/djbooth.png");
+        this.djBooth = loadImage("assets/djbooth/djbooth.png");
 
-        this.player = loadImage("../assets/player/player.png");
+        this.player = loadImage("assets/player/player.png");
 
-        this.npc = loadImage("../assets/npc/npc.png")
+        this.npc = loadImage("assets/npc/npc.png")
 
-        this.chatBubble = loadImage("../assets/chat-bubbles/chatBubble1.png")
-        this.chatBubbleFail = loadImage("../assets/chat-bubbles/chatBubbleFail.png")
-        this.chatBubble2 = loadImage(("../assets/chat-bubbles/chatBubble2.png"))
-        this.chatBubbleSuccess = loadImage(("../assets/chat-bubbles/chatBubbleSuccess.png"))
+        this.chatBubble = loadImage("assets/chat-bubbles/chatBubble1.png")
+        this.chatBubbleFail = loadImage("assets/chat-bubbles/chatBubbleFail.png")
+        this.chatBubble2 = loadImage(("assets/chat-bubbles/chatBubble2.png"))
+        this.chatBubbleSuccess = loadImage(("assets/chat-bubbles/chatBubbleSuccess.png"))
     }
 
     draw() {
         clear()
-        this.background.draw();
-        this.djBooth.draw();
-        this.cd1.draw();
-        this.cd2.draw();
-        this.cd3.draw();
-        this.npc.draw();
-        this.chatBubble.draw();
-        this.player.draw();
-        this.moveGrabbedCd()
-        this.canGrabOrDrop = this.cdPlayerInteraction();
-        this.djBoothInteraction();
+        if (this.gameStart === false) {
+            this.background.draw();
+            image(this.startScreen, 200, 70, 600, 400)
+        } else if (this.gameStart === true) {
+
+            this.background.draw();
+            this.djBooth.draw();
+            this.cd1.draw();
+            this.cd2.draw();
+            this.cd3.draw();
+            this.npc.draw();
+            this.chatBubble.draw();
+            this.player.draw();
+            this.moveGrabbedCd()
+            this.canGrabOrDrop = this.cdPlayerInteraction();
+            this.djBoothInteraction();
+        }
+
 
     }
     moveGrabbedCd() {
@@ -100,19 +114,19 @@ class Game {
 
     djBoothInteraction() {
 
-        if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 140, this.djBooth.y + 50) <= 20) {
+        if (dist(this.cd1.x, this.cd1.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 40) {
 
             this.checkedCd = 'wrongCd'
 
 
         }
 
-        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 140, this.djBooth.y + 50) <= 20) {
+        if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 40) {
 
             this.checkedCd = 'wrongCd'
 
         }
-        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 140, this.djBooth.y + 50) <= 20) {
+        if (dist(this.cd3.x, this.cd3.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 40) {
 
             this.checkedCd = 'rightCd'
 

@@ -43,7 +43,7 @@ class ChatBubble {
 
 
     draw() {
- 
+
         // if there is no cd then display this image
         if (game.checkedCd === 'wrongCd' && !game.hasCd) {
             //console.log(game.checkedCd)
