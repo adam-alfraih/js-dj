@@ -9,6 +9,7 @@ class Game {
 
 
     setup() {
+
         this.background = new Background();
         // this.backgroundFail = new Background();
         this.cdCoords = [
@@ -20,22 +21,22 @@ class Game {
         this.cd1 = new Cds(this.cdCoords[0].x, this.cdCoords[0].y);
         this.cd2 = new Cds(this.cdCoords[1].x, this.cdCoords[1].y);
         this.cd3 = new Cds(this.cdCoords[2].x, this.cdCoords[2].y);
-        this.djBooth = new DjBoothClass(360, 360);
-        this.player = new PlayersClass();
+
+        // create an instance of each class
+        this.djBooth = new DjBoothClass(360, 360); // DjBooth
+        this.player = new PlayersClass(); // Player
         this.npc = new Npc();
         this.chatBubble = new ChatBubble();
 
-        //MUSIC
 
+        //MUSIC
         this.clubSound = new Audio("assets/music/clubSound.mp3");
-        this.cd1Sound = new Audio("assets/music/cd1.m4a");
-        this.cd2Sound = new Audio("assets/music/cd2.m4a");
-        this.cd3Sound = new Audio("assets/music/cd3.m4a");
+        this.cd1Sound = new Audio("assets/music/cd1.mp3");
+        this.cd2Sound = new Audio("assets/music/cd2.mp3");
+        this.cd3Sound = new Audio("assets/music/cd3.mp3");
 
 
         draw();
-
-
         // this.chatBubbleFail = new ChatBubble();
         // this.chatBubble2 = new ChatBubble();
         // this.chatBubbleSuccess = new ChatBubble();
@@ -45,6 +46,8 @@ class Game {
         this.grabbedCd
         this.currentCd
     }
+    // run a function on each CD (or to be more specific...)
+    // run the changePosition method on each CD
     shuffleArray(cdsPositions) {
 
         for (let i = 0; i < cdsPositions.length; i++) {
@@ -55,16 +58,20 @@ class Game {
     changePosition(currentIndex) {
         const rndIndex = Math.floor(Math.random() * currentIndex)
         const holder = this.cdCoords[currentIndex];
+        // left side = right side
+        // location = thing that lives in a location
+        // position in the cdCoords array = object from a random cdCoords position
         this.cdCoords[currentIndex] = this.cdCoords[rndIndex];
         this.cdCoords[rndIndex] = holder;
     }
+    // where I upload all images
     preload() {
         this.startScreen = loadImage("assets/start-screen/startScreen2.gif");
 
         // this.backgroundImage = loadImage("../assets/background/club-background.png");
-        this.backgroundImage = loadImage("assets/background/club-background.png");
+        this.backgroundImage = loadImage("assets/background/club-background.gif");
         this.backgroundFail = loadImage("assets/background/club-backgroundRed.png");
-        this.backgroundSuccess = loadImage("assets/background/club-backgroundBright.png");
+        this.backgroundSuccess = loadImage("assets/background/club-backgroundBright2.gif");
 
         this.cd = loadImage("assets/cd/cdgif.gif");
 
@@ -83,7 +90,7 @@ class Game {
     }
 
     draw() {
-
+        // game start and game over
         console.log(this.gameStart, this.isGameOver)
         if (this.gameStart === false && !this.isGameOver) {
             clear()
@@ -128,10 +135,17 @@ class Game {
     grabOrDrop() {
 
         if (this.canGrabOrDrop && !this.isGameOver) {
+            // left side = right side
+            // container = thing that goes in container
+            // if we grabbed last time, drop this time (and vice versa)
             this.hasCd = !this.hasCd;
+            // if we have a CD, then we're dropping
             if (this.hasCd) {
                 this.grabbedCd = this.currentCd
-                this.checkedCd = "undefined"
+                // the way to do this would be
+                // this.checkedCd = null 
+                this.checkedCd = "undefined" 
+            // else, we're grabbing a CD
             } else {
                 this.grabbedCd = ""
                 this.checkedCd = "noCd"

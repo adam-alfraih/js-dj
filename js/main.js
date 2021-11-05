@@ -1,4 +1,8 @@
 const game = new Game();
+// e.g. game.correctCd
+// e.g. game.cdCoords
+
+console.log('game created!')
 
 function setup() {
 	createCanvas(1000, 700);
@@ -39,11 +43,15 @@ function keyPressed() {
 		game.grabOrDrop();
 	}
 
-	if (keyCode === 13) {
+
+	// enter key
+	if (keyCode === 82) {
 		// move the player up
 		game.gameReset()
 	}
-	if (keyCode === 16) {
+
+	// shift key
+	if (keyCode = 16) {
 		game.gameStart = true;
 		
 	}
