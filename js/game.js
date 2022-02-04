@@ -187,7 +187,7 @@ class Game {
 
         if (dist(this.cd2.x, this.cd2.y, this.djBooth.x + 150, this.djBooth.y + 50) <= 100) {
             this.checkedCd = 'wrongCd'
-            if (!game.hasCd) {
+            if (!game.hasCd) { 
                 this.clubSound.pause();
                 this.cd2Sound.play();
             }
